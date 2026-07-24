@@ -11,10 +11,10 @@ export function captureStats() {
   };
 }
 
-function uptime() {
+export function uptime(procUptimePath = "/proc/uptime") {
   try {
     const seconds = parseFloat(
-      readFileSync("/proc/uptime", "utf8").split(" ")[0],
+      readFileSync(procUptimePath, "utf8").split(" ")[0],
     );
     return formatDuration(seconds);
   } catch {
@@ -34,7 +34,7 @@ function formatDuration(seconds) {
   return parts.join(" ");
 }
 
-function shellUptime() {
+export function shellUptime() {
   try {
     const output = execFileSync("uptime", ["-p"], { encoding: "utf8" }).trim();
     return output.replace(/^up /, "");
@@ -43,7 +43,7 @@ function shellUptime() {
   }
 }
 
-function diskUsagePercent(path = "/") {
+export function diskUsagePercent(path = "/") {
   try {
     const output = execFileSync("df", ["-kP", path], { encoding: "utf8" });
     const line = output.split("\n")[1];
@@ -54,9 +54,9 @@ function diskUsagePercent(path = "/") {
   }
 }
 
-function memory() {
+export function memory(procMeminfoPath = "/proc/meminfo") {
   try {
-    const meminfo = readFileSync("/proc/meminfo", "utf8");
+    const meminfo = readFileSync(procMeminfoPath, "utf8");
     const totalKb = parseInt(
       meminfo.match(/MemTotal:\s+(\d+)/)?.[1] ?? "0",
       10,
