@@ -119,3 +119,10 @@ and current LTS.
 
 Publishing to npm is manual (`npm publish`), not automated on release —
 deliberate choice for now, revisit if release cadence picks up.
+
+v0.1.1 shipped: published to npm (https://www.npmjs.com/package/motd-forge)
+and tagged/released on GitHub (https://github.com/zkm/motd-forge/releases/tag/v0.1.1).
+Patch release upgrading `js-yaml` from v4 to v5 — v5 dropped the default
+export in favor of named exports only, so `src/cli.js` switched from
+`import yaml from "js-yaml"` to `import { load } from "js-yaml"`. Internal
+change only, no CLI/config behavior change for users.
