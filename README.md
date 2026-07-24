@@ -1,5 +1,7 @@
 # motd-forge
 
+[![CI](https://github.com/zkm/motd-forge/actions/workflows/ci.yml/badge.svg)](https://github.com/zkm/motd-forge/actions/workflows/ci.yml)
+
 Generate a randomized login banner (MOTD) for your servers: a title (rendered
 big via `figlet` if it's installed, plain text otherwise), current uptime,
 disk and memory usage, and a random quote.
