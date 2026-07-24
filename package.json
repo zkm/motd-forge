@@ -1,6 +1,6 @@
 {
   "name": "motd-forge",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate a randomized login banner (MOTD) with system stats and a quote.",
   "type": "module",
   "packageManager": "yarn@1.22.22",
