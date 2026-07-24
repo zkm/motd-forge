@@ -47,19 +47,30 @@ original.
 - Only runtime dependency: `js-yaml`, since Node has no built-in YAML
   parser (Ruby's stdlib does). Everything else deliberately stays stdlib.
 - Node version target: `>=18.3.0` (when `util.parseArgs` first shipped).
-- Lint/format: not set up yet.
+- Package manager: Yarn (classic, v1.22.22) — `yarn.lock` is the
+  committed lockfile, not `package-lock.json`. End users installing the
+  published package still use `npm install -g motd-forge`; Yarn is a
+  dev-workflow choice for this repo only.
+- Lint/format: [Biome](https://biomejs.dev) (`@biomejs/biome`, devDependency
+  only — never ships to consumers). One tool instead of ESLint+Prettier,
+  config in `biome.json`. 2-space indent, double quotes, import sorting on
+  (`assist.actions.source.organizeImports`); everything else is Biome's
+  `recommended` preset defaults.
 
 ## Commands
 
-- `npm install` — install dependencies
-- `npm test` — run the full `node:test` suite (`node --test`). Note: pass
+- `yarn install` — install dependencies
+- `yarn test` — run the full `node:test` suite (`node --test`). Note: pass
   no path argument — `node --test test/` and `node --test test` both fail
   on this Node install (v26.5.0) with a spurious `MODULE_NOT_FOUND`; bare
   `node --test` relies on node's default test-file discovery and works.
 - `node --test test/quotes.test.js` — run a single test file
 - `node bin/motd-forge.js` — run the CLI directly from source
-- `npm link` (from repo root) — install the `motd-forge` bin globally
+- `yarn link` (from repo root) — install the `motd-forge` bin globally
   from source for manual end-to-end testing
+- `yarn lint` — `biome check .` (formatting, import order, lint rules;
+  no writes)
+- `yarn format` — `biome check --write .` (applies safe fixes)
 
 ## Architecture
 
@@ -100,5 +111,7 @@ check in `banner.js`.
 Node port scaffolded and functionally complete: all four modules ported,
 `node:test` suite passing (mirrors the RSpec suite 1:1), CLI manually
 verified (default run, `--name`, `--no-quote`, `--quote-file`, `--config`,
-`--help`, `--version`). Not yet published to npm; no git repo initialized
-yet in this directory. Lint/format setup still TBD.
+`--help`, `--version`). Biome wired up for lint/format, codebase passes
+`yarn lint` clean. Git repo initialized, merged with the GitHub-created
+`zkm/motd-forge` remote (`origin`, branch `master`); not yet pushed. Not
+yet published to npm.

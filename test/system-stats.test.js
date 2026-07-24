@@ -1,5 +1,5 @@
-import { test } from "node:test";
 import assert from "node:assert/strict";
+import { test } from "node:test";
 import { captureStats } from "../src/system-stats.js";
 
 test("returns a snapshot with uptime, disk, and memory fields populated", () => {

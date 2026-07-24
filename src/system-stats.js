@@ -1,5 +1,5 @@
-import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 
 // Reads uptime, disk, and memory usage from the host. Uses /proc on Linux,
 // with a best-effort shell fallback (e.g. `uptime`) elsewhere.
@@ -13,7 +13,9 @@ export function captureStats() {
 
 function uptime() {
   try {
-    const seconds = parseFloat(readFileSync("/proc/uptime", "utf8").split(" ")[0]);
+    const seconds = parseFloat(
+      readFileSync("/proc/uptime", "utf8").split(" ")[0],
+    );
     return formatDuration(seconds);
   } catch {
     return shellUptime();
@@ -55,8 +57,14 @@ function diskUsagePercent(path = "/") {
 function memory() {
   try {
     const meminfo = readFileSync("/proc/meminfo", "utf8");
-    const totalKb = parseInt(meminfo.match(/MemTotal:\s+(\d+)/)?.[1] ?? "0", 10);
-    const availableKb = parseInt(meminfo.match(/MemAvailable:\s+(\d+)/)?.[1] ?? "0", 10);
+    const totalKb = parseInt(
+      meminfo.match(/MemTotal:\s+(\d+)/)?.[1] ?? "0",
+      10,
+    );
+    const availableKb = parseInt(
+      meminfo.match(/MemAvailable:\s+(\d+)/)?.[1] ?? "0",
+      10,
+    );
     const usedKb = totalKb - availableKb;
     const percent = totalKb > 0 ? Math.round((usedKb / totalKb) * 100) : 0;
 
@@ -66,7 +74,11 @@ function memory() {
       memUsedPercent: `${percent}%`,
     };
   } catch {
-    return { memUsed: "unknown", memTotal: "unknown", memUsedPercent: "unknown" };
+    return {
+      memUsed: "unknown",
+      memTotal: "unknown",
+      memUsedPercent: "unknown",
+    };
   }
 }
 

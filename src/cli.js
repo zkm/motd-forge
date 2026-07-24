@@ -1,7 +1,7 @@
-import { parseArgs } from "node:util";
 import { existsSync, readFileSync } from "node:fs";
 import { homedir, hostname } from "node:os";
 import { join } from "node:path";
+import { parseArgs } from "node:util";
 import yaml from "js-yaml";
 import { renderBanner } from "./banner.js";
 import { pickQuote } from "./quotes.js";
@@ -24,7 +24,9 @@ export function run(argv = process.argv.slice(2)) {
   if (options.exitCode !== undefined) return options.exitCode;
 
   const config = loadConfig(options.configPath);
-  const title = options.titleFromCli ? options.title : (config.title ?? options.title);
+  const title = options.titleFromCli
+    ? options.title
+    : (config.title ?? options.title);
   const quoteFile = options.quoteFile ?? config.quote_file;
 
   const quote = options.showQuote ? pickQuote({ file: quoteFile }) : null;

@@ -38,8 +38,8 @@ shell's rc file) so it prints on every SSH login:
 
 ## Development
 
-    $ npm install
-    $ npm test              # run the test suite
+    $ yarn install
+    $ yarn test              # run the test suite
     $ node bin/motd-forge.js   # run the CLI directly from source
 
 ## License

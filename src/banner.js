@@ -1,12 +1,16 @@
 import { execFileSync } from "node:child_process";
-import { captureStats } from "./system-stats.js";
 import { pickQuote } from "./quotes.js";
+import { captureStats } from "./system-stats.js";
 
 let figletAvailable;
 
 // Composes the final banner: a big title (via `figlet` if it's installed,
 // else a plain bordered header), system stats, and a random quote.
-export function renderBanner({ title, stats = captureStats(), quote = pickQuote() } = {}) {
+export function renderBanner({
+  title,
+  stats = captureStats(),
+  quote = pickQuote(),
+} = {}) {
   return [renderTitle(title), renderStats(stats), renderQuote(quote)]
     .filter((line) => line != null)
     .join("\n");
