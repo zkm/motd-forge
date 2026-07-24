@@ -108,10 +108,14 @@ check in `banner.js`.
 
 ## Status
 
-Node port scaffolded and functionally complete: all four modules ported,
-`node:test` suite passing (mirrors the RSpec suite 1:1), CLI manually
-verified (default run, `--name`, `--no-quote`, `--quote-file`, `--config`,
-`--help`, `--version`). Biome wired up for lint/format, codebase passes
-`yarn lint` clean. Git repo initialized, merged with the GitHub-created
-`zkm/motd-forge` remote (`origin`, branch `master`); not yet pushed. Not
-yet published to npm.
+v0.1.0 shipped: published to npm (https://www.npmjs.com/package/motd-forge)
+and tagged/released on GitHub (https://github.com/zkm/motd-forge/releases/tag/v0.1.0).
+All four modules ported, `node:test` suite passing (mirrors the RSpec suite
+1:1), CLI manually verified (default run, `--name`, `--no-quote`,
+`--quote-file`, `--config`, `--help`, `--version`). Biome wired up for
+lint/format. GitHub Actions CI (`.github/workflows/ci.yml`) runs
+install/lint/test on push to `master` and on PRs, matrix across Node 18
+and current LTS.
+
+Publishing to npm is manual (`npm publish`), not automated on release —
+deliberate choice for now, revisit if release cadence picks up.
