@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { homedir, hostname } from "node:os";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
-import yaml from "js-yaml";
+import { load } from "js-yaml";
 import { renderBanner } from "./banner.js";
 import { pickQuote } from "./quotes.js";
 import { VERSION } from "./version.js";
@@ -78,7 +78,7 @@ function loadConfig(configPath) {
   if (!existsSync(configPath)) return {};
 
   try {
-    return yaml.load(readFileSync(configPath, "utf8")) ?? {};
+    return load(readFileSync(configPath, "utf8")) ?? {};
   } catch {
     console.error(`motd-forge: ignoring invalid config at ${configPath}`);
     return {};
