@@ -2,6 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/motd-forge.svg)](https://www.npmjs.com/package/motd-forge)
 [![CI](https://github.com/zkm/motd-forge/actions/workflows/ci.yml/badge.svg)](https://github.com/zkm/motd-forge/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/npm/l/motd-forge.svg)](https://github.com/zkm/motd-forge/blob/master/LICENSE)
 
 Generate a randomized login banner (MOTD) for your servers: a title (rendered
 big via `figlet` if it's installed, plain text otherwise), current uptime,
