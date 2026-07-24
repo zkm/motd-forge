@@ -1,0 +1,44 @@
+{
+  "name": "motd-forge",
+  "version": "0.1.0",
+  "description": "Generate a randomized login banner (MOTD) with system stats and a quote.",
+  "type": "module",
+  "bin": {
+    "motd-forge": "./bin/motd-forge.js"
+  },
+  "main": "./src/index.js",
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.3.0"
+  },
+  "scripts": {
+    "test": "node --test",
+    "start": "node bin/motd-forge.js"
+  },
+  "keywords": [
+    "motd",
+    "banner",
+    "cli",
+    "homelab",
+    "sysadmin",
+    "login"
+  ],
+  "author": "Zach Schneider <zachschneider@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zkm/motd-forge.git"
+  },
+  "homepage": "https://github.com/zkm/motd-forge",
+  "bugs": {
+    "url": "https://github.com/zkm/motd-forge/issues"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
