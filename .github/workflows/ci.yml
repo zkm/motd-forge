@@ -19,7 +19,10 @@ jobs:
           cache: yarn
       - run: yarn install --frozen-lockfile
       - run: yarn lint
-      - run: yarn test:coverage
+      - if: matrix.node != 'lts/*'
+        run: yarn test
+      - if: matrix.node == 'lts/*'
+        run: yarn test:coverage
       - if: matrix.node == 'lts/*'
         uses: codecov/codecov-action@v5
         with:
