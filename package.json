@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "yarn@1.22.22",
   "bin": {
-    "motd-forge": "./bin/motd-forge.js"
+    "motd-forge": "bin/motd-forge.js"
   },
   "main": "./src/index.js",
   "files": [
