@@ -78,3 +78,20 @@ test("--config with valid YAML uses the configured title", () => {
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test("--help prints usage and exits 0", () => {
+  const result = spawnSync(process.execPath, [bin, "--help"], {
+    encoding: "utf8",
+  });
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /Usage: motd-forge/);
+});
+
+test("an unrecognized flag prints an error and usage, and exits 1", () => {
+  const result = spawnSync(process.execPath, [bin, "--bogus"], {
+    encoding: "utf8",
+  });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /motd-forge:/);
+  assert.match(result.stderr, /Usage: motd-forge/);
+});

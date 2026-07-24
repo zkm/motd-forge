@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { pickQuote } from "./quotes.js";
 import { captureStats } from "./system-stats.js";
 
-let figletAvailable;
+const figletAvailability = new Map();
 
 // Composes the final banner: a big title (via `figlet` if it's installed,
 // else a plain bordered header), system stats, and a random quote.
@@ -20,27 +20,29 @@ function renderTitle(title) {
   return figletTitle(title) ?? plainTitle(title);
 }
 
-function figletTitle(title) {
-  if (!isFigletAvailable()) return null;
+export function figletTitle(title, command = "figlet") {
+  if (!isFigletAvailable(command)) return null;
 
   try {
-    const output = execFileSync("figlet", [title], { encoding: "utf8" });
+    const output = execFileSync(command, [title], { encoding: "utf8" });
     return output.length > 0 ? output.replace(/\s+$/, "") : null;
   } catch {
     return null;
   }
 }
 
-function isFigletAvailable() {
-  if (figletAvailable !== undefined) return figletAvailable;
+export function isFigletAvailable(command = "figlet") {
+  if (figletAvailability.has(command)) return figletAvailability.get(command);
 
+  let available;
   try {
-    execFileSync("which", ["figlet"], { stdio: "ignore" });
-    figletAvailable = true;
+    execFileSync("which", [command], { stdio: "ignore" });
+    available = true;
   } catch {
-    figletAvailable = false;
+    available = false;
   }
-  return figletAvailable;
+  figletAvailability.set(command, available);
+  return available;
 }
 
 function plainTitle(title) {
