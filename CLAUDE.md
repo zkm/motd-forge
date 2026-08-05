@@ -11,7 +11,9 @@ Builds a custom message-of-the-day banner showing uptime, disk and memory
 usage, and a random quote — handy for homelab servers. Same concept, npm
 ecosystem instead of RubyGems.
 
-- Ruby original: https://github.com/zkm/motd_forge
+- Ruby original: https://github.com/zkm/motd_forge — if a change here
+  affects behavior, output format, or CLI flags, check whether it should be
+  mirrored there too.
 - This repo: zkm/motd-forge (separate repo, not a monorepo with the gem —
   different toolchains, independent versioning, better discoverability)
 
@@ -47,8 +49,11 @@ original.
 - Only runtime dependency: `js-yaml`, since Node has no built-in YAML
   parser (Ruby's stdlib does). Everything else deliberately stays stdlib.
 - Node version target: `>=18.3.0` (when `util.parseArgs` first shipped).
-- Package manager: Yarn (classic, v1.22.22) — `yarn.lock` is the
-  committed lockfile, not `package-lock.json`. End users installing the
+- Package manager: Yarn 4 (Berry, v4.18.0), pinned via `.yarnrc.yml`'s
+  `yarnPath` and `package.json`'s `packageManager` field — `yarn.lock` is
+  the committed lockfile, not `package-lock.json`. Uses the
+  `node-modules` linker (not PnP), so `node_modules/` is still produced
+  for compatibility with npm-based tooling. End users installing the
   published package still use `npm install -g motd-forge`; Yarn is a
   dev-workflow choice for this repo only.
 - Lint/format: [Biome](https://biomejs.dev) (`@biomejs/biome`, devDependency
@@ -106,23 +111,8 @@ snapshot and a quote -> renders to a string `CLI` prints. No shared
 mutable state between modules other than the memoized figlet-availability
 check in `banner.js`.
 
-## Status
-
-v0.1.0 shipped: published to npm (https://www.npmjs.com/package/motd-forge)
-and tagged/released on GitHub (https://github.com/zkm/motd-forge/releases/tag/v0.1.0).
-All four modules ported, `node:test` suite passing (mirrors the RSpec suite
-1:1), CLI manually verified (default run, `--name`, `--no-quote`,
-`--quote-file`, `--config`, `--help`, `--version`). Biome wired up for
-lint/format. GitHub Actions CI (`.github/workflows/ci.yml`) runs
-install/lint/test on push to `master` and on PRs, matrix across Node 18
-and current LTS.
+## Release process
 
 Publishing to npm is manual (`npm publish`), not automated on release —
-deliberate choice for now, revisit if release cadence picks up.
-
-v0.1.1 shipped: published to npm (https://www.npmjs.com/package/motd-forge)
-and tagged/released on GitHub (https://github.com/zkm/motd-forge/releases/tag/v0.1.1).
-Patch release upgrading `js-yaml` from v4 to v5 — v5 dropped the default
-export in favor of named exports only, so `src/cli.js` switched from
-`import yaml from "js-yaml"` to `import { load } from "js-yaml"`. Internal
-change only, no CLI/config behavior change for users.
+deliberate choice for now, revisit if release cadence picks up. See
+`CHANGELOG.md` for release history.
