@@ -41,7 +41,7 @@
     "url": "https://github.com/zkm/motd-forge/issues"
   },
   "dependencies": {
-    "js-yaml": "^5.2.3"
+    "js-yaml": "^5.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.7"
