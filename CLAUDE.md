@@ -115,8 +115,11 @@ check in `banner.js`.
 
 Publishing is automated: publishing a GitHub Release runs
 `.github/workflows/publish.yml`, which lints, tests, checks the release tag
-matches `package.json` (`v0.1.3` for `0.1.3`), then publishes to npmjs.com
-(trusted publishing, no token) and to GitHub Packages as `@zkm/motd-forge`.
+matches `package.json` (`v0.1.3` for `0.1.3`), then stages the version on
+npmjs.com (trusted publishing, no token; the trusted publisher allows staged
+publishing only) and publishes to GitHub Packages as `@zkm/motd-forge`.
 To release: bump `version` in `package.json`, update `CHANGELOG.md`, merge,
-then create the release with tag `v<version>`. See `CHANGELOG.md` for
-release history.
+then create the release with tag `v<version>`. Once the workflow finishes,
+approve the staged version with `npm stage list` and
+`npm stage approve <stage-id>` (needs `npm login` and 2FA); it isn't live on
+npmjs.com until then. See `CHANGELOG.md` for release history.
