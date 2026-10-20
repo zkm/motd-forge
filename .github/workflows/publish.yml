@@ -30,8 +30,10 @@ jobs:
             exit 1
           fi
 
-      - name: Publish to npmjs.com
-        run: npm publish --access public
+      # The npm trusted publisher only allows staged publishing: the version
+      # waits on npmjs.com until it is approved with 2FA (npm stage approve <id>)
+      - name: Stage the release on npmjs.com
+        run: npm stage publish . --access public --provenance
 
       # GitHub's npm registry only accepts scoped names, so publish there as @zkm/motd-forge
       - name: Publish to GitHub Packages
