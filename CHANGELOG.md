@@ -1,8 +1,9 @@
 ## [0.1.3] - 2026-10-20
 
-- Publish automatically when a GitHub Release is published: to npmjs.com
-  (trusted publishing, with provenance) and to GitHub Packages as
-  `@zkm/motd-forge`. No CLI or config behavior change.
+- Releases are automated: publishing a GitHub Release stages the version on
+  npmjs.com for 2FA approval (trusted publishing, with provenance) and
+  publishes it to GitHub Packages as `@zkm/motd-forge`. No CLI or config
+  behavior change.
 
 ## [0.1.2] - 2026-10-14
 
