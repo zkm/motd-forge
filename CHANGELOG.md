@@ -1,3 +1,20 @@
+## [0.1.3] - 2026-10-20
+
+- Publish automatically when a GitHub Release is published: to npmjs.com
+  (trusted publishing, with provenance) and to GitHub Packages as
+  `@zkm/motd-forge`. No CLI or config behavior change.
+
+## [0.1.2] - 2026-10-14
+
+- Raise the `js-yaml` floor to `^5.4.3`. Versions 5.0.0-5.4.0 are affected by
+  an advisory where `maxTotalMergeKeys` does not limit CPU use. motd-forge only
+  parses its own config file, so exposure was low.
+- `figletTitle` and `isFigletAvailable` are now exported and accept an optional
+  command name (default `figlet`), with availability cached per command. No CLI
+  or config-file behavior change.
+- `bin` uses the string shorthand; the `motd-forge` command is unchanged.
+- Development moved to Yarn 4 (Berry) with the node-modules linker.
+
 ## [0.1.1] - 2026-07-24
 
 - Upgrade `js-yaml` v4 -> v5 (v5 dropped the default export in favor of named
