@@ -113,6 +113,10 @@ check in `banner.js`.
 
 ## Release process
 
-Publishing to npm is manual (`npm publish`), not automated on release —
-deliberate choice for now, revisit if release cadence picks up. See
-`CHANGELOG.md` for release history.
+Publishing is automated: publishing a GitHub Release runs
+`.github/workflows/publish.yml`, which lints, tests, checks the release tag
+matches `package.json` (`v0.1.3` for `0.1.3`), then publishes to npmjs.com
+(trusted publishing, no token) and to GitHub Packages as `@zkm/motd-forge`.
+To release: bump `version` in `package.json`, update `CHANGELOG.md`, merge,
+then create the release with tag `v<version>`. See `CHANGELOG.md` for
+release history.
